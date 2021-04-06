@@ -61,10 +61,6 @@ class Product(View):
         try:
             data = request.body.decode('utf-8')
             data = json.loads(data)
-            if ProductModel.objects.filter(ProductID=data['ProductID']).count():
-                return JsonResponse({"Status": "Error", "Result": "ProductID already exist."}, status=404, safe=False)
-            else:
-                print("Exists!")
             new_product = ProductModel(**data)
             new_product.save()
             return JsonResponse({"Status": "Success", "Result": "Hey, POST is done!"}, status=200, safe=False)
