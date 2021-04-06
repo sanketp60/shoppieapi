@@ -63,6 +63,6 @@ class Product(View):
             data = json.loads(data)
             new_product = ProductModel(**data)
             new_product.save()
-            return JsonResponse({"Status": "Success", "Result": "Hey, POST is done!"}, status=200, safe=False)
+            return JsonResponse({"Status": "Success", "Result": "New product created named: "+data['Name']}, status=200, safe=False)
         except:
             return JsonResponse({"Status": "Error", "Result": "Invalid JSON passed. Please check guide."}, status=404, safe=False)
