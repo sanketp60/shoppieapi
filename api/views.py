@@ -14,13 +14,6 @@ import api.tokenizer as tknzr
 from .serializer import serialize
 from .models import Product as ProductModel
 
-from django.views.decorators.http import require_http_methods
-
-
-@require_http_methods(["POST"])
-def get_test(request):
-    return JsonResponse({"Status": "GET CHECK SUCCESSFUL"}, status=200, safe=False)
-
 class Product(View):
     get_method_selector = ""
     #JUST TO EXEMPT CSRF VERIFICATION
