@@ -61,8 +61,12 @@ class Product(View):
         try:
             data = request.body.decode('utf-8')
             data = json.loads(data)
-            new_product = ProductModel(**data)
-            new_product.save()
-            return JsonResponse({"Status": "Success", "Result": "New product created named: "+data['Name']}, status=200, safe=False)
+            print(data['Name'])
+            if ProductModel.objects.filter(Name=data['Name']).count():
+                return JsonResponse({"Status": "Error", "Result": "Product with same name exists already."}, status=409, safe=False)
+            else:
+                new_product = ProductModel(**data)
+                new_product.save()
+                return JsonResponse({"Status": "Success", "Result": "New product created named: "+data['Name']}, status=200, safe=False)
         except:
             return JsonResponse({"Status": "Error", "Result": "Invalid JSON passed. Please check guide."}, status=404, safe=False)
