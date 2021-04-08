@@ -48,6 +48,30 @@ class Product(View):
         else:
             return JsonResponse({"Status": "Error", "Result": "Invalid operation requested!"}, status=404, safe=False)
 
+    def patch(self, request, productid):
+        '''
+        try:
+            if ProductModel.objects.filter(ProductID=productid).count():
+                return JsonResponse({"Status": "Success", "Result": "ProductID found"}, status=200, safe=False)
+            else:
+                return JsonResponse({"Status": "Success", "Result": "ProductID not found"}, status=404, safe=False)
+        except:
+            return JsonResponse({"Status": "Error", "Result": "Invalid ProductID format"}, status=404, safe=False)
+        '''
+        try:
+            myproduct = ProductModel.objects.filter(ProductID=productid)
+            data = request.body.decode('utf-8')
+            data = json.loads(data)
+            if myproduct.count():
+                try:
+                    myproduct.update(**data)
+                    return JsonResponse({"Status": "Success", "Result": "Product updated succefully!"}, status=200, safe=False)
+                except:
+                    return JsonResponse({"Status": "Error", "Result": "Invalid JSON passed. Please check guide."}, status=404, safe=False)
+            else:
+                return JsonResponse({"Status": "Success", "Result": "ProductID not found"}, status=404, safe=False)
+        except:
+            return JsonResponse({"Status": "Error", "Result": "Invalid ProductID format"}, status=404, safe=False)
 
     def delete(self, request, productid):
         try:
@@ -61,7 +85,6 @@ class Product(View):
         try:
             data = request.body.decode('utf-8')
             data = json.loads(data)
-            print(data['Name'])
             if ProductModel.objects.filter(Name=data['Name']).count():
                 return JsonResponse({"Status": "Error", "Result": "Product with same name exists already."}, status=409, safe=False)
             else:
