@@ -119,3 +119,29 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Password encrytion secret key
+# SECURITY WARNING: keep the secret key used in production secret!
+PASS_SECRET = '85835aaa84c143810b739f716958eae4'
+
+# JWT secret key and time duration
+# SECURITY WARNING: keep the secret key used in production secret!
+JWT_SECRET = 'cdb020ba0c366ceede5ad1d7626e4cd7'
+# Define by how much you want to increment token validity time (in minutes)
+JWT_TIME = 60
+
+# Access definitions
+# SECURITY WARNING: keep the secret key used in production secret!
+ACCESS_R = ['get']
+ACCESS_W = ['post', 'patch', 'delete', 'get']
+ACCESS_DEF = {
+    'Customer': {'customer': ACCESS_W, 'shipper': ACCESS_R, 'supplier': ACCESS_R},
+    'Shipper': {'customer': ACCESS_R, 'shipper': ACCESS_W, 'supplier': ACCESS_R},
+    'Supplier': {'customer': ACCESS_R, 'shipper': ACCESS_R, 'supplier': ACCESS_W},
+    'Order': {'customer': ACCESS_R, 'shipper': ACCESS_W, 'supplier': ACCESS_W},
+    'OrderDetail': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_R},
+    'OrderHistory': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_R},
+    'Wishlist': {'customer': ACCESS_W, 'shipper': [], 'supplier': []},
+    'Product': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_W},
+    'ProductSupplierMapper': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_W},
+}
