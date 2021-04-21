@@ -36,19 +36,19 @@ customer_urlpatterns = [
     path('customer-delete/<str:customerid>', Customer.as_view()),
 ]
 
-supplier_urlpatterns = [
+shipper_urlpatterns = [
     # POST
-    path('supplier-register/', Supplier.as_view(post_method_selector="register")),
-    path('supplier-login/', Supplier.as_view(post_method_selector="login")),
+    path('shipper-register/', Shipper.as_view(post_method_selector="register")),
+    path('shipper-login/', Shipper.as_view(post_method_selector="login")),
 
     # GET
-    path('supplier-details/<str:supplierid>', Supplier.as_view()),
+    path('shipper-details/<str:shipperid>', Shipper.as_view()),
 
     # PATCH
-    path('supplier-update/<str:supplierid>', Supplier.as_view()),
+    path('shipper-update/<str:shipperid>', Shipper.as_view()),
 
     # DELETE
-    path('supplier-delete/<str:supplierid>', Supplier.as_view()),
+    path('shipper-delete/<str:shipperid>', Shipper.as_view()),
 ]
 
-urlpatterns = product_urlpatterns + customer_urlpatterns + supplier_urlpatterns + guide_urlpatterns
+urlpatterns = product_urlpatterns + customer_urlpatterns + shipper_urlpatterns + guide_urlpatterns

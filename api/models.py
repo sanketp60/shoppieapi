@@ -27,12 +27,12 @@ class Customer(models.Model):
     def __str__(self):
         return "{firstname} {lastname} - {email} [{customerid}]".format(firstname=self.FirstName, lastname=self.LastName, email=self.Email, customerid = self.CustomerID)
 
-class Supplier(models.Model):
-    SupplierID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+class Shipper(models.Model):
+    ShipperID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     Email = models.EmailField(max_length=254, unique=True, blank=False)
     Password = models.CharField(max_length=100, blank=False)
     CompanyName = models.CharField(max_length=60)
     Phone = models.CharField(max_length=15)
 
     def __str__(self):
-        return "{companyname} - {email} [{supplierid}]".format(companyname=self.CompanyName, email=self.Email, supplierid = self.SupplierID)
+        return "{companyname} - {email} [{shipperid}]".format(companyname=self.CompanyName, email=self.Email, shipperid = self.ShipperID)
