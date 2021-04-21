@@ -36,3 +36,16 @@ class Shipper(models.Model):
 
     def __str__(self):
         return "{companyname} - {email} [{shipperid}]".format(companyname=self.CompanyName, email=self.Email, shipperid = self.ShipperID)
+
+class Supplier(models.Model):
+    SupplierID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Email = models.EmailField(max_length=254, unique=True, blank=False)
+    Password = models.CharField(max_length=100, blank=False)
+    Address = models.TextField()
+    Phone = models.CharField(max_length=15)
+    DateRegistered = models.DateField(editable=False, default=timezone.now)
+    ContactTitle = models.CharField(max_length=40)
+    CompanyName = models.CharField(max_length=60)
+
+    def __str__(self):
+        return "{companyname} - {email} [{supplierid}]".format(companyname=self.CompanyName, email=self.Email, supplierid = self.SupplierID)

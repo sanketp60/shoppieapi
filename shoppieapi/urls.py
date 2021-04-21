@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+admin.site.site_header = 'ShoppieAPI admin dashboard'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
