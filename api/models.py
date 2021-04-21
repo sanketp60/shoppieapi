@@ -49,3 +49,8 @@ class Supplier(models.Model):
 
     def __str__(self):
         return "{companyname} - {email} [{supplierid}]".format(companyname=self.CompanyName, email=self.Email, supplierid = self.SupplierID)
+
+class Wish(models.Model):
+    WishID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    CustomerID = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    ProductID = models.ForeignKey(Product, on_delete=models.CASCADE)

@@ -12,6 +12,7 @@ import jwt
 import api.tokenizer as tknzr
 
 from .serializer import serialize
+from .models import Wish as WishModel
 from .models import Product as ProductModel
 from .models import Customer as CustomerModel
 from .models import Shipper as ShipperModel
@@ -232,6 +233,50 @@ class Customer(View):
             return JsonResponse({"Status": "Success", "Result": "Deleted customer for customerid: "+customerid}, status=200, safe = False)
         except:
             return JsonResponse({"Status": "Error", "Result": "CustomerID not found"}, status=404, safe=False)
+
+class Wish(View):
+    #JUST TO EXEMPT CSRF VERIFICATION
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(Wish, self).dispatch(request, *args, **kwargs)
+
+    @access_decorator
+    def get(self, request):
+        token_data = tknzr.dec(request.META.get('HTTP_AUTHORIZATION')[7:])
+        token_user = token_data['username']
+        wishlist = WishModel.objects.filter(CustomerID=token_user)
+        data = []
+        for element in wishlist:
+            data.append({
+                "WishID": element.WishID,
+                "ProductID": element.ProductID.ProductID, 
+                "Picture": element.ProductID.Picture
+                })
+        return JsonResponse({"Status": "Success", "Result": data}, status=200, safe=False)
+        
+    @access_decorator
+    def delete(self, request, wishid):
+        try:
+            mywish = WishModel.objects.get(WishID=wishid)
+            mywish.delete()
+            return JsonResponse({"Status": "Success", "Result": "Deleted wish for wishid: "+wishid}, status=200, safe = False)
+        except:
+            return JsonResponse({"Status": "Error", "Result": "WishID not found"}, status=404, safe=False)
+
+    @access_decorator
+    def post(self, request):
+        try:
+            data = request.body.decode('utf-8')
+            data = json.loads(data)
+            myproduct = ProductModel.objects.get(ProductID=data['ProductID'])
+            token_data = tknzr.dec(request.META.get('HTTP_AUTHORIZATION')[7:])
+            token_user = token_data['username']
+            mycustomer = CustomerModel.objects.get(CustomerID=token_user)
+            mywish = WishModel.objects.create(CustomerID=mycustomer, ProductID=myproduct)
+            mywish.save()
+            return JsonResponse({"Status": "Success", "Result": "Product added to Wish List."}, status=200, safe=False)
+        except :
+            return JsonResponse({"Status": "Error", "Result": "Invalid JSON passed or ProductID doesn't exist."}, status=404, safe=False)
 
 class Product(View):
     get_method_selector = ""

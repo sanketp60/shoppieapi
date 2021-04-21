@@ -66,4 +66,15 @@ supplier_urlpatterns = [
     path('supplier-delete/<str:supplierid>', Supplier.as_view()),
 ]
 
-urlpatterns = product_urlpatterns + customer_urlpatterns + shipper_urlpatterns + supplier_urlpatterns + guide_urlpatterns
+wish_urlpatterns = [
+    # POST
+    path('wish-create/', Wish.as_view()),
+
+    # GET
+    path('wish-list/', Wish.as_view()),
+    
+    # DELETE
+    path('wish-delete/<str:wishid>', Wish.as_view()),
+]
+
+urlpatterns = product_urlpatterns + customer_urlpatterns + shipper_urlpatterns + supplier_urlpatterns + wish_urlpatterns + guide_urlpatterns
