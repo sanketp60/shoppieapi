@@ -3,7 +3,7 @@ from django.conf import settings
 import jwt
 
 def enc(username, passhash, usertype):
-    token = jwt.encode({'exp': datetime.utcnow()+timedelta(minutes=settings.JWT_TIME),
+    token = jwt.encode({#'exp': datetime.utcnow()+timedelta(minutes=settings.JWT_TIME),
                         'username': username,
                         'passhash': passhash,
                         'usertype': usertype,

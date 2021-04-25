@@ -135,13 +135,14 @@ JWT_TIME = 60
 ACCESS_R = ['get']
 ACCESS_W = ['post', 'patch', 'delete', 'get']
 ACCESS_DEF = {
-    'Customer': {'customer': ACCESS_W, 'shipper': ACCESS_R, 'supplier': ACCESS_R},
-    'Shipper': {'customer': ACCESS_R, 'shipper': ACCESS_W, 'supplier': ACCESS_R},
-    'Supplier': {'customer': ACCESS_R, 'shipper': ACCESS_R, 'supplier': ACCESS_W},
-    'Order': {'customer': ACCESS_R, 'shipper': ACCESS_W, 'supplier': ACCESS_W},
-    'OrderDetail': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_R},
-    'OrderHistory': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_R},
-    'Wishlist': {'customer': ACCESS_W, 'shipper': [], 'supplier': []},
-    'Product': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_W},
-    'ProductSupplierMapper': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_W},
+    'Customer': {'customer': ACCESS_W, 'shipper': ACCESS_R, 'supplier': ACCESS_R, 'administrator': ACCESS_R},
+    'Shipper': {'customer': ACCESS_R, 'shipper': ACCESS_W, 'supplier': ACCESS_R, 'administrator': ACCESS_R},
+    'Supplier': {'customer': ACCESS_R, 'shipper': ACCESS_R, 'supplier': ACCESS_W, 'administrator': ACCESS_R},
+    'Order': {'customer': ACCESS_W, 'shipper': ACCESS_W, 'supplier': ACCESS_W, 'administrator': ACCESS_W},
+    'OrderItem': {'customer': ACCESS_R, 'shipper': ACCESS_W, 'supplier': ACCESS_R, 'administrator': ACCESS_W},
+    'OrderHistory': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_R, 'administrator': ACCESS_W},
+    'Wish': {'customer': ACCESS_W, 'shipper': [], 'supplier': [], 'administrator': ACCESS_W},
+    'Product': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_W, 'administrator': ACCESS_W},
+    'Psm': {'customer': ACCESS_R, 'shipper': [], 'supplier': ACCESS_W, 'administrator': ACCESS_W},
+    'Administrator': {'customer': [], 'shipper': [], 'supplier': [], 'administrator': ACCESS_W},
 }

@@ -8,16 +8,127 @@
 </head>
 <body>
 <pre>
-# Customer registration guide:
-ENDPOINT: api/customer-register/
-PARAMETERS:
+<b><h1>Customer:</h1></b>
+# POST
+customer-register/
 {
-    "Email": "testemail@gmail.com",
-    "Password": "Pass1234$$",
-    "FirstName": "SomeFirstName",
-    "LastName": "SomeLastName",
-    "Phone": "1234567890",
-    "Address": "Some test address"
-}</pre>
+    "Email": "",
+    "Password": "",
+    "FirstName": "",
+    "LastName": "",
+    "Phone": "",
+    "Address": ""
+}
+customer-login/
+{
+    "Email": "",
+    "Password": ""
+}
+wish-create/
+{
+    "ProductID: "",
+}
+order-create/
+{
+    "Address": "",
+    "OrderItems": [
+        {
+            "ProductID": "", 
+            "SupplierID": "",
+            "IsCOD": ,
+            "ItemQuantity":
+        }
+}
+# GET
+customer-details/[customerid]
+product-search/[query]
+product-details/[productid]
+wish-list/
+order-details/[orderid]
+# UPDATE
+customer-update/[customerid]
+# DELETE
+customer-delete/[customerid]
+wish-delete/[wishid]
+order-delete/[orderid]
+
+<b><h1>Administrator:</h1></b>
+#POST
+administrator-register/
+{
+    "Name": "",
+    "Email": "",
+    "Password": ""
+}
+administrator-login/
+{
+    "Email": "",
+    "Password": ""
+}
+administrator-approve/[productid]
+administrator-reject/[productid]
+#GET
+administrator-pending/
+product-details/[productid]
+
+<b><h1>Supplier:</h1></b>
+#POST
+supplier-register/
+{
+    "Email": "",
+    "Password": "",
+    "Address": "",
+    "Phone": "",
+    "ContactTitle": "",
+    "CompanyName": ""
+}
+supplier-login/
+{
+    "Email": "",
+    "Password": "",
+}
+supplier-apply/[productid]
+{
+    "UnitPrice": [price in float],
+    "UnitsOnOrder": [amount in int]
+}
+supplier-unapply/[productid]
+#GET
+supplier-details/[supplierid]
+product-search/[query]
+product-details/[productid]
+supplier-approve/[orderitemid]
+supplier-reject/[orderitemid]
+#PATCH
+supplier-update/[supplierid]
+#DELETE
+supplier-delete/[supplierid]
+
+<b><h1>Shipper:</h1></b>
+#POST
+shipper-register/
+{
+    "Email": "",
+    "Password": "",
+    "CompanyName": "",
+    "Phone": ""
+}
+shipper-login/
+{
+    "Email": "",
+    "Password": "",
+}
+#GET
+shipper-details/[supplierid]
+shipment-details/[orderitemid]
+#PATCH
+shipper-update/[supplierid]
+{
+    "CompletedStatus": "Shipped",
+    "NextStatus": "Shipping"
+}
+#DELETE
+shipper-delete/[supplierid]
+</pre>
 </body>
 </html>
