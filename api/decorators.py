@@ -5,7 +5,7 @@ import jwt
 
 def access_decorator(func):
     def inner(self, request, **kwargs):
-        return func(self, request, **kwargs)
+        #return func(self, request, **kwargs)
         try:
             try:
                 method = self.post_method_selector
