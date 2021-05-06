@@ -6,9 +6,9 @@
 4. Run development server: python manage.py runserver
 
 # Project Contributors:
-* Sarvesh Khot (TU3F1718051
 * Sanket Pisat (TU3F1718048)
-* Suyog Patl (TU3F1718052)
+* * Suyog Patl (TU3F1718052)
+* Sarvesh Khot (TU3F1718051)
 * Damini Shelke (TU3F1718053)
 
 ### NOTE: API guide can be found at endpoint: [host]/api/guide/
